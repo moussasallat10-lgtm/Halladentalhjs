@@ -286,8 +286,7 @@ $("f").onsubmit=function(e){
   var btn=f.querySelector("button[type=submit],button:not([type])");if(btn)btn.disabled=true;
 msg.textContent=lang==="ar"?"جارٍ الإرسال…":"Sending…";
 if(WACOPY){ var t="حجز جديد / New booking\nالاسم: "+data.name+"\nالهاتف: "+data.phone+"\nالتاريخ: "+data.date+"\nالوقت: "+data.time+"\nالخدمة: "+data.service; window.open("https://wa.me/"+PHONE+"?text="+encodeURIComponent(t),"_blank"); }
-fetch(SCRIPT_URL,{method:"POST",body:pl}).then(function(r){return r.text()}).then(function(s){var j;try{j=JSON.parse(s)}catch(x){j=null}
- if(j&&j.ok){msg.textContent=T[lang].sent;f.reset()}else{msg.textContent=WACOPY?T[lang].sent:T[lang].err;if(WACOPY)f.reset()}
+fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:pl}).then(function(){msg.textContent=T[lang].sent;f.reset()
 }).catch(function(){msg.textContent=WACOPY?T[lang].sent:T[lang].err;if(WACOPY)f.reset()}).then(function(){if(btn)btn.disabled=false;msg.scrollIntoView({behavior:"smooth",block:"center"})});
 };
 
